@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Feline Authority Test - Cat16Personalities.com</title>
+    <style>
+        /* Base Styles for a Clean Look */
+        body { 
+            font-family: 'Arial', sans-serif; 
+            max-width: 700px; 
+            margin: 0 auto; /* Center the content */
+            padding: 20px; 
+            text-align: center; 
+            background-color: #f7f7f7; /* Light background */
+        }
+        
+        /* Banner Style */
+        .banner {
+            width: 100%;
+            margin-bottom: 30px;
+            padding: 10px 0;
+            background-color: #333; /* Dark background for banner contrast */
+            border-radius: 5px;
+        }
+        .banner img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px; /* Adjust banner image size */
+        }
+
+        /* Quiz Specific Styles */
+        h1 { color: #333; font-size: 2em; margin-bottom: 10px; }
+        .tagline { color: #555; margin-bottom: 30px; }
+        .progress-bar { height: 10px; background-color: #ddd; margin-bottom: 25px; border-radius: 5px; }
+        .progress-fill { height: 100%; background-color: #6a0dad; /* A royal purple/blue for the cat theme */ width: 0%; transition: width 0.3s; border-radius: 5px; }
+        .question-box { background-color: white; border: 1px solid #ccc; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .question-text { font-size: 1.3em; margin-bottom: 30px; font-weight: bold; color: #222; }
+        .option-button { 
+            display: block; width: 100%; padding: 15px; margin-top: 15px;
+            border: 2px solid #6a0dad; 
+            background-color: white; 
+            color: #6a0dad;
+            cursor: pointer;
+            border-radius: 5px; 
+            font-size: 1.1em;
+            transition: all 0.2s;
+        }
+        .option-button:hover { 
+            background-color: #6a0dad; 
+            color: white;
+        }
+        #result-screen { display: none; margin-top: 50px; background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        #final-type-code { font-size: 3em; color: #6a0dad; margin: 10px 0; }
+        
+        /* Legal Disclaimer Footer */
+        .disclaimer { font-size: 0.75em; color: #999; margin-top: 50px; text-align: left;}
+    </style>
+</head>
+<body>
+
+    <div class="banner">
+        <img src="CATGUY-04.png" alt="Sponsored by Catguy - Logo Banner">
+    </div>
+
+    <h1>The Feline Authority Personality Test</h1>
+    <p class="tagline">Discover Your Cat's True Inner Archetype.</p>
+
+    <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+
+    <div id="quiz-container">
+        <p id="question-number">Question 1 of 70</p>
+        <div class="question-box">
+            <p id="question-text" class="question-text">Loading...</p>
+            <button class="option-button" id="option-a" onclick="answerQuestion('A')">Option A</button>
+            <button class="option-button" id="option-b" onclick="answerQuestion('B')">Option B</button>
+        </div>
+    </div>
+
+    <div id="result-screen">
+        <h2>Your Cat's Type Is:</h2>
+        <h1 id="final-type-code">CHBR</h1>
+        <p id="final-type-name" style="font-size: 1.5em;"></p>
+        <p>Congratulations! Click below to view the full personality report.</p>
+        <button class="option-button" style="background-color: #6a0dad; color: white;" onclick="redirectToReport()">View Full Report</button>
+    </div>
+
+    <div class="disclaimer">
+        Disclaimer: This test is a fun, derivative personality assessment based on common psychological types and is not affiliated with the official MBTI® or The Myers & Briggs Foundation.
+    </div>
+
+    <script>
+        // Placeholder for the 70 questions list and logic (see next section)
+        let questions = []; 
+        let scores = { 'CS': 0, 'HD': 0, 'BN': 0, 'RC': 0 };
+        let currentQIndex = 0;
+        const totalQs = 70;
+
+        // The JavaScript functions (loadQuestion, answerQuestion, showResults, redirectToReport) 
+        // will be added here once we finalize the 70-question list and its structure.
+
+        // Placeholder function to start the quiz
+        // window.onload = loadQuestion; 
+    </script>
+</body>
+</html>
