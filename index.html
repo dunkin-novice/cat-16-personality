@@ -89,18 +89,394 @@
         Disclaimer: This test is a fun, derivative personality assessment based on common psychological types and is not affiliated with the official MBTI® or The Myers & Briggs Foundation.
     </div>
 
-    <script>
-        // Placeholder for the 70 questions list and logic (see next section)
-        let questions = []; 
-        let scores = { 'CS': 0, 'HD': 0, 'BN': 0, 'RC': 0 };
-        let currentQIndex = 0;
-        const totalQs = 70;
+<script>
+    // Define your 70 questions and their scoring axes here
+    // AXIS ID format: [C/S], [H/D], [B/N], [R/C]
+    // Score Letter format: The letter corresponding to the 'A' choice.
+    const questions = [
+        ['When a new human guest enters the house, your cat:', 
+         'Commands the room, immediately moving to greet/inspect the guest.', 
+         'Retreats to a private, secure spot to watch from afar.',
+         'CS', 'C'], 
+        ['When hungry, your cat is more likely to:', 
+         'Give a sharp, insistent demand or perform a strategic obstruction.', 
+         'Sit nearby with a soulful gaze and a gentle, pleading meow.',
+         'BN', 'B'], 
+        ['When playing with a simple string or piece of fluff, your cat will:', 
+         'Focus intensely on the *physical object* and how it moves *now*.', 
+         'Treat the object as an imaginary *prey* in a complicated, abstract scenario.',
+         'HD', 'H'], 
+        ['Regarding feeding time and routines, your cat:', 
+         'Demands a predictable schedule; any deviation causes visible distress.', 
+         'Is flexible and takes meals "whenever," easily adapting to different times.',
+         'RC', 'R'],
+        ['After a long nap, your cat first seeks:', 
+         'To loudly announce its re-entry into the house and find the center of activity.', 
+         'A moment alone to stretch, groom, and ensure no one is watching too closely.',
+         'CS', 'C'],
+        ['If another cat (or pet) is using a preferred bed, your cat will:', 
+         'Force a calculated eviction using size, stare, or subtle physical force.', 
+         'Find a less comfortable spot, sulking, or try to squeeze in next to them.',
+         'BN', 'B'],
+        ['A common sound (e.g., a door closing) is usually interpreted as:', 
+         'A specific, concrete event requiring physical awareness (What is it? Where is it?).', 
+         'A fascinating cue that might precede a new, unknown adventure.',
+         'HD', 'H'],
+        ['If a toy is left out, your cat is more likely to:', 
+         'Engage with it until the play session is definitively finished and walk away.', 
+         'Intermittently bat it, get distracted, and return later.',
+         'RC', 'C'],
+        ['When seeking affection, your cat:', 
+         'Stands directly in your line of sight or interrupts your task until noticed.', 
+         'Waits patiently until you are still and relaxed before tentatively approaching.',
+         'CS', 'C'],
+        ['When approaching its sleeping spot, your cat:', 
+         'Spends a deliberate amount of time fluffing, pawing, and arranging the area to be perfect.', 
+         'Simply flops down wherever it lands, seemingly unconcerned with messy arrangements.',
+         'RC', 'R'],
+        ['Which appeals more to your cat?', 
+         'Consistency and logic in its environment and schedule.', 
+         'Harmonious, gentle physical contact and affection.',
+         'BN', 'B'], 
+        ['When tracking something, your cat pays more attention to:', 
+         'Clear, observable movements and the physical path of the object.', 
+         'Strange, potential movements, shadows, and subtle noises.',
+         'HD', 'H'], 
+        ['New, non-routine interactions (e.g., a sudden loud sound) tend to:', 
+         'Stimulate and energize your cat, making it investigate.', 
+         'Tax its reserves, causing it to withdraw and hide.',
+         'CS', 'C'], 
+        ['When making a decision (e.g., where to nap), your cat relies more on:', 
+         'Standards (what is efficient and high).', 
+         'Feelings (what feels right and connected to you).',
+         'BN', 'B'], 
+        ['Your cat feels better about:', 
+         'Having its favorite, perfect spot secured and owned.', 
+         'Having the option of many potential spots to try.',
+         'RC', 'R'],
+        ['In the cat\'s mind:', 
+         'Facts—like the location of the food—"speak for themselves."', 
+         'Facts only serve to illustrate larger principles of the house.',
+         'HD', 'H'],
+        ['Your cat prefers:', 
+         'To interact with many people briefly.', 
+         'A few intense, lengthy, deep bonds.',
+         'CS', 'C'],
+        ['Which seems more important to your cat?', 
+         'Being in control or clearly dominating the space.', 
+         'Being loved and cherished by you.',
+         'BN', 'B'], 
+        ['Your cat tends to be more:', 
+         'Deliberate and planned than spontaneous.', 
+         'Spontaneous and impulsive than deliberate.',
+         'RC', 'R'],
+        ['When presented with a task (like getting water), your cat is more likely to:', 
+         'Perform the action the usual, proven way (e.g., drink from the bowl).', 
+         'Experiment and try its own way (e.g., drink from the faucet or glass).',
+         'HD', 'H'],
+        ['When a stranger is nearby, your cat:', 
+         'Communicates easily and at length with loud meows/purrs.', 
+         'Is silent and watchful, finding little to communicate.',
+         'CS', 'C'],
+        ['Your cat\'s inclination when it comes to attention is to be somewhat:', 
+         'Objective (expects a specific result like food).', 
+         'Personal (seeks connection and mutual affection).',
+         'BN', 'B'],
+        ['Your cat is more:', 
+         'Punctual, demanding food at the exact schedule.', 
+         'Leisurely, happy to eat whenever you eventually offer it.',
+         'RC', 'R'],
+        ['New, impractical hiding spots (e.g., an open drawer) are:', 
+         'Somewhat annoying, as they are not safe or useful.', 
+         'Rather fascinating, representing a new possibility.',
+         'HD', 'H'],
+        ['In the house, your cat\'s main focus is to:', 
+         'Keep abreast of everyone\'s location and activities.', 
+         'Be comfortable, often oblivious to what others are doing.',
+         'CS', 'C'],
+        ['Your cat is more comfortable making:', 
+         'Logical judgments (This action gets food).', 
+         'Value judgments (I love this person).',
+         'BN', 'B'],
+        ['Does your cat try to make events occur:', 
+         'By careful selection (sitting *here* to get *that*).', 
+         'Randomly, trusting chance will bring excitement.',
+         'RC', 'R'],
+        ['Your cat interacts with the world more by:', 
+         'Processing clear, literal sensor information (sights, facts).', 
+         'Making imaginative leaps based on what *might* be (intuition).',
+         'HD', 'H'],
+        ['When seeking attention, your cat:', 
+         'Just acts, trusting its voice/actions will achieve the goal.', 
+         'Cautiously plans its approach, waiting for the right moment.',
+         'CS', 'C'],
+        ['In judging others, your cat is swayed more by:', 
+         'The consistency and logical application of rules.', 
+         'The emotional closeness and affection it receives.',
+         'BN', 'B'],
+        ['Your cat prefers things to be:', 
+         'Settled, decided, and predictable.', 
+         'Unsettled and open to change.',
+         'RC', 'R'],
+        ['Your cat\'s intelligence is more:', 
+         'Practical (how to open the treat bag).', 
+         'Ingenious (how to create a new way to climb).',
+         'HD', 'H'],
+        ['When there is new, loud commotion, your cat:', 
+         'Hastens to investigate first.', 
+         'Hopes someone else will handle it.',
+         'CS', 'C'],
+        ['If another cat breaks a house rule, your cat is swayed more by:', 
+         'Enforcing the clear, established boundary.', 
+         'Considering the other cat\'s current emotional state/need.',
+         'BN', 'B'],
+        ['Your cat puts more value on:', 
+         'Finality and closure (e.g., catching the laser dot).', 
+         'Open-mindedness to new stimuli and possibilities.',
+         'RC', 'R'],
+        ['Your cat is more likely to view the human as:', 
+         'A utility (source of food, heat, or necessary action).', 
+         'A complex emotional being (that needs support or watching).',
+         'HD', 'H'],
+        ['When relaxing, your cat is more inclined to be:', 
+         'Easy to approach and willing to interact.', 
+         'Somewhat reserved and tucked away.',
+         'CS', 'C'],
+        ['Your cat is more:', 
+         'Firm in its demands than gentle.', 
+         'Gentle than firm.',
+         'BN', 'B'],
+        ['Your cat is more:', 
+         'Routinized than whimsical.', 
+         'Whimsical than routinized.',
+         'RC', 'R'],
+        ['When assessing a new potential risk, your cat is more likely to trust:', 
+         'Its own past experience in similar situations.', 
+         'A spontaneous hunch or strange intuition.',
+         'HD', 'H'],
+        ['At peak play time, your cat:', 
+         'Gains energy from the intensity of the interaction, wanting more.', 
+         'Gets easily drained by the excitement and often retreats to rest.',
+         'CS', 'C'],
+        ['Your cat values being:', 
+         'Unwavering and persistent in its demands.', 
+         'Devoted and loyal to its person.',
+         'BN', 'B'],
+        ['Your cat is more comfortable:', 
+         'Once a routine is firmly established.', 
+         'While the routine is still flexible.',
+         'RC', 'R'],
+        ['Your cat seems more interested in:', 
+         'The production of a successful catch.', 
+         'The design and research of new behaviors.',
+         'HD', 'H'],
+        ['In a new, non-threatening situation (e.g., a quiet friend visiting), your cat:', 
+         'Initiates interaction with a sniff or meow.', 
+         'Waits patiently to be approached first.',
+         'CS', 'C'],
+        ['Which rules your cat more?', 
+         'Its rational, practical *head*.', 
+         'Its emotional, affectionate *heart*.',
+         'BN', 'B'],
+        ['Your cat is more comfortable with playtime that is:', 
+         'Structured and predictable (same toy, same time).', 
+         'Casual and spontaneous (chasing a random bug).',
+         'RC', 'R'],
+        ['Your cat is drawn more to:', 
+         'Fundamentals (the physical need for food, touch).', 
+         'Overtones (the emotional subtext, your mood).',
+         'HD', 'H'],
+        ['Your cat prefers:', 
+         'To interact with many people briefly.', 
+         'A few close friends with more lengthy, deep contact.',
+         'CS', 'C'],
+        ['Which seems worse to your cat?', 
+         'To be too cold or objective (Treated like a machine).', 
+         'To be too passionate or affectionate (Overwhelmed by touch).',
+         'BN', 'B'],
+        ['Your cat tends to look for:', 
+         'The orderly, expected path through the house.', 
+         'Whatever new and unexpected thing turns up.',
+         'RC', 'R'],
+        ['When hunting, your cat:', 
+         'Uses tested routes and logic.', 
+         'Spontaneously chases shadows and imaginary things.',
+         'HD', 'H'],
+        ['When a stranger enters, your cat:', 
+         'Meows easily and at length.', 
+         'Is silent and watchful.',
+         'CS', 'C'],
+        ['In a relationship with a littermate, your cat is inclined more to be:', 
+         'Fair-minded (I earned this spot, you earned that spot).', 
+         'Sympathetic (allowing the other cat the spot if they seem to need it).',
+         'BN', 'B'],
+        ['Your cat feels better about:', 
+         'Having a final, settled arrangement.', 
+         'A tentative, preliminary plan, open to revision.',
+         'RC', 'R'],
+        ['Your cat\'s body language is:', 
+         'Literal and clear (e.g., obvious stalk or rub).', 
+         'Figurative and open to interpretation (a subtle glance, a strange posture).',
+         'HD', 'H'],
+        ['In the house, your cat:', 
+         'Keeps abreast of everyone\'s location.', 
+         'Is often found sleeping and oblivious.',
+         'CS', 'C'],
+        ['Your cat would prefer its human to focus on its:', 
+         'Clear reason and strategy.', 
+         'Strong feelings and emotional state.',
+         'BN', 'B'],
+        ['Does it bother your cat more having things:', 
+         'Unsettled and requiring final arrangement (a door slightly ajar).', 
+         'Settled and confined (all doors closed and all options gone).',
+         'RC', 'R'],
+        ['Your cat seems to prize:', 
+         'A strong sense of reality, facts, and truth.', 
+         'A vivid imagination and the potential of things.',
+         'HD', 'H'],
+        ['When seeking attention, your cat:', 
+         'Just does it, trusting the result.', 
+         'Cautiously plans its approach.',
+         'CS', 'C'],
+        ['Your cat seems basically:', 
+         'Hard-headed and assertive.', 
+         'Soft-hearted and easily placated.',
+         'BN', 'B'],
+        ['When dealing with you, the rules about boundaries (e.g., the counter) are:', 
+         'Non-negotiable and final.', 
+         'Flexible and circumstantial.',
+         'RC', 'R'],
+        ['Your cat is more:', 
+         'Practical (for food).', 
+         'Ingenious (at finding trouble).',
+         'HD', 'H'],
+        ['At peak play time, your cat:', 
+         'Gains energy from the interaction.', 
+         'Gets easily drained and retreats.',
+         'CS', 'C'],
+        ['Which is a greater fault in a cat\'s behavior?', 
+         'Being overly critical and controlling of the territory.', 
+         'Being indiscriminate with affection.',
+         'BN', 'B'],
+        ['Which appeals more to your cat?', 
+         'The structured and scheduled day.', 
+         'The unstructured and unscheduled day.',
+         'RC', 'R'],
+        ['When assessing a situation, your cat goes more by:', 
+         'Observable facts (where are the doors, where is the light).', 
+         'Abstract principles (where is the best *vantage point*).',
+         'HD', 'H'],
+        ['Which does your cat seem to possess more?', 
+         'Clarity of instinct/reason.', 
+         'Strength of compassion/devotion.',
+         'BN', 'B'],
+        ['Your cat is more comfortable:', 
+         'Once a routine is established.', 
+         'While the routine is still flexible.',
+         'RC', 'R'],
+    ];
 
-        // The JavaScript functions (loadQuestion, answerQuestion, showResults, redirectToReport) 
-        // will be added here once we finalize the 70-question list and its structure.
+    let scores = { 'CS': 0, 'HD': 0, 'BN': 0, 'RC': 0 };
+    let currentQIndex = 0;
+    const totalQs = questions.length;
+    let finalCode = '';
 
-        // Placeholder function to start the quiz
-        // window.onload = loadQuestion; 
-    </script>
+    // Map the code to the name (You will need to create a map object for all 16 names)
+    const typeNames = {
+        'CHBR': 'The Grand General', 
+        'CHNR': 'The Affectionate Warden', 
+        'CDBR': 'The Visionary Supervisor', 
+        'CDNR': 'The Charismatic Counselor', 
+        'SHBR': 'The Silent Strategist', 
+        'SHNR': 'The Gentle Defender', 
+        'SDBR': 'The Observant Theorist', 
+        'SDNR': 'The Empathetic Muse', 
+        'CHBC': 'The Street CEO', 
+        'CHNC': 'The Party Starter', 
+        'CDBC': 'The Wild Debater', 
+        'CDNC': 'The Joyful Performer', 
+        'SHBC': 'The Master Tinkerer', 
+        'SHNC': 'The Emotional Artist', 
+        'SDBC': 'The Free Spirit', 
+        'SDNC': 'The Peaceful Dreamer',
+    };
+
+    function loadQuestion() {
+        if (currentQIndex >= totalQs) {
+            showResults();
+            return;
+        }
+
+        const q = questions[currentQIndex];
+        document.getElementById('question-number').textContent = `Question ${currentQIndex + 1} of ${totalQs}`;
+        document.getElementById('question-text').innerHTML = q[0];
+        document.getElementById('option-a').innerHTML = q[1];
+        document.getElementById('option-b').innerHTML = q[2];
+
+        // Update progress bar
+        const progress = ((currentQIndex) / totalQs) * 100;
+        document.getElementById('progress-fill').style.width = `${progress}%`;
+    }
+
+    function answerQuestion(choice) {
+        if (currentQIndex >= totalQs) return;
+
+        const q = questions[currentQIndex];
+        const axis = q[3]; // e.g., 'CS'
+        const scoreLetter = q[4]; // e.g., 'C' (corresponds to Option A)
+
+        // Increment score for the chosen letter
+        if (choice === 'A') {
+            scores[axis]++;
+        } else {
+            // Choice B increments the *opposite* letter
+        }
+
+        currentQIndex++;
+        loadQuestion();
+    }
+
+    function calculateFinalCode() {
+        const cs_score = scores['CS']; // Score for Commanding (C)
+        const hd_score = scores['HD']; // Score for Hunter (H)
+        const bn_score = scores['BN']; // Score for Bossy (B)
+        const rc_score = scores['RC']; // Score for Regal (R)
+        
+        // C/S Axis (Total 18 questions, need at least 10 C to be 'C')
+        const letter1 = (cs_score > 9) ? 'C' : 'S';
+        
+        // H/D Axis (Total 18 questions, need at least 10 H to be 'H')
+        const letter2 = (hd_score > 9) ? 'H' : 'D';
+        
+        // B/N Axis (Total 18 questions, need at least 10 B to be 'B')
+        const letter3 = (bn_score > 9) ? 'B' : 'N';
+        
+        // R/C Axis (Total 16 questions, need at least 9 R to be 'R')
+        const letter4 = (rc_score > 8) ? 'R' : 'C'; // C for Chaos is the opposite
+        
+        return letter1 + letter2 + letter3 + letter4;
+    }
+
+    function showResults() {
+        // Final progress update
+        document.getElementById('progress-fill').style.width = `100%`;
+        
+        finalCode = calculateFinalCode();
+        const finalName = typeNames[finalCode] || 'Unknown Type';
+
+        document.getElementById('quiz-container').style.display = 'none';
+        document.getElementById('final-type-code').textContent = finalCode;
+        document.getElementById('final-type-name').textContent = finalName;
+        document.getElementById('result-screen').style.display = 'block';
+    }
+
+    function redirectToReport() {
+        // Redirects to the specific report file based on the final code (e.g., CHBR.html)
+        window.location.href = `${finalCode}.html`;
+    }
+
+    // Start the quiz once the page is fully loaded
+    window.onload = loadQuestion;
+</script>
 </body>
 </html>
