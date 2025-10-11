@@ -57,7 +57,7 @@
             font-size: 1.2em;
             max-width: 500px;
             margin-bottom: 30px;
-            line-height: 1.6; /* Added for better readability */
+            line-height: 1.6;
         }
 
         /* Call-to-Action Button */
@@ -77,29 +77,76 @@
             transform: scale(1.05);
         }
         
+        /* NEW: Testimonials Section */
+        .testimonials-section {
+            padding: 60px 20px;
+            background-color: #ffffff;
+        }
+        .testimonials-section h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .testimonial-card {
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: left;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid #6a0dad;
+            flex-shrink: 0;
+        }
+        .testimonial-info strong {
+            display: block;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .testimonial-info span {
+            font-size: 0.9em;
+            color: #6a0dad; /* Personality type color */
+            font-weight: bold;
+        }
+        .testimonial-comment {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.5;
+            flex-grow: 1; /* Allows comment to take up available space */
+        }
+
         /* Footer with Sponsor */
         .site-footer {
-            background-color: #f0f0f0;
-            padding: 25px 20px;
-            margin-top: 40px;
-            color: #555;
+            background-color: #f0f0f0; 
+            padding: 25px 20px; 
+            margin-top: 40px; 
+            color: #555; 
             border-top: 1px solid #ddd;
         }
-        .sponsor-text {
-            margin: 0 0 10px 0;
-            font-size: 0.9em;
-        }
-        .sponsor-logo {
-            max-height: 50px;
-            margin-bottom: 20px;
-        }
-        .disclaimer {
-            font-size: 0.75em; 
-            color: #999; 
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: left;
-        }
+        .sponsor-text { margin: 0 0 10px 0; font-size: 0.9em; }
+        .sponsor-logo { max-height: 50px; margin-bottom: 20px; }
+        .disclaimer { font-size: 0.75em; color: #999; max-width: 700px; margin: 0 auto; text-align: left; }
     </style>
 </head>
 <body>
@@ -116,6 +163,54 @@
         <p>Our 70-question quiz decodes their quirks. From 3 AM zoomies to judging you from across the room, find out what's really going on in that fuzzy little head.</p>
         <a href="quiz.html" class="cta-button">Take the Test →</a>
     </main>
+
+    <section class="testimonials-section">
+        <h2>See What Our Humans Have To Say!</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://placekitten.com/60/60" alt="Cat Avatar" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <strong>Mittens</strong>
+                        <span>CHBR (The Grand General)</span>
+                    </div>
+                </div>
+                <p class="testimonial-comment">"Meow. Meow meow meow meow. Meow meow meow meow meow meow meow. Meow meow."</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://placekitten.com/g/60/60" alt="Cat Avatar" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <strong>Whiskers</strong>
+                        <span>SDNC (The Peaceful Dreamer)</span>
+                    </div>
+                </div>
+                <p class="testimonial-comment">"Meooow... *stretch* ...Meow meow, purrrr. Mrow."</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://cataas.com/cat/says/purr?width=60&height=60" alt="Cat Avatar" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <strong>Noodle</strong>
+                        <span>CDBC (The Wild Debater)</span>
+                    </div>
+                </div>
+                <p class="testimonial-comment">"MRRROW! Mrow mrow meow MEOW. Purrrrrr?"</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://www.placecage.com/60/60" alt="Cat Avatar" class="testimonial-avatar"> <div class="testimonial-info">
+                        <strong>Captain Fluffernutter</strong>
+                        <span>CHNC (The Party Starter)</span>
+                    </div>
+                </div>
+                <p class="testimonial-comment">"Mrow! Meow meow meow meow meow meow meow! Purrrrrrrrrr!"</p>
+            </div>
+        </div>
+    </section>
 
     <footer class="site-footer">
         <p class="sponsor-text">Sponsored by</p>
