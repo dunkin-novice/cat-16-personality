@@ -175,7 +175,56 @@
         </footer>
 
     <script>
-        // Your slider script...
-    </script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('slider-track');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const cards = Array.from(track.children);
+        const viewport = document.querySelector('.slider-viewport');
+        
+        let currentIndex = 0;
+
+        function updateSliderPosition() {
+            // Check if cards exist to prevent errors
+            if (cards.length === 0) return;
+
+            const cardWidth = cards[0].offsetWidth;
+            const gap = parseInt(window.getComputedStyle(track).gap);
+            const scrollAmount = (cardWidth + gap) * currentIndex;
+            
+            track.style.transform = `translateX(-${scrollAmount}px)`;
+
+            // Update button states
+            prevBtn.disabled = currentIndex === 0;
+            
+            // Check if the end of the slider is reached
+            const trackWidth = track.scrollWidth;
+            const viewportWidth = viewport.offsetWidth;
+            nextBtn.disabled = scrollAmount >= trackWidth - viewportWidth - 1; // -1 for buffer
+        }
+
+        nextBtn.addEventListener('click', () => {
+            const viewportWidth = viewport.offsetWidth;
+            const trackWidth = track.scrollWidth;
+            const currentPosition = (cards[0].offsetWidth + parseInt(window.getComputedStyle(track).gap)) * currentIndex;
+            
+            if (currentPosition < trackWidth - viewportWidth) {
+                currentIndex++;
+                updateSliderPosition();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSliderPosition();
+            }
+        });
+        
+        // Initial setup and recalculation on window resize for responsiveness
+        updateSliderPosition();
+        window.addEventListener('resize', updateSliderPosition);
+    });
+</script>
 </body>
 </html>
