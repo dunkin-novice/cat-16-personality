@@ -1,1 +1,19 @@
 <link rel="stylesheet" href="style.css">
+
+/* Footer */
+.site-footer {
+    background-color: #f0f0f0; 
+    padding: 25px 30px; 
+    color: #555; 
+    border-top: 1px solid #ddd;
+}
+.footer-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+.sponsor-text, .disclaimer { margin-bottom: 15px; }
+.sponsor-logo { 
+    max-height: 50px; /* This is the missing line */
+    margin-bottom: 15px; 
+}
