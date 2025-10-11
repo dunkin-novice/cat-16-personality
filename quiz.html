@@ -38,7 +38,7 @@
         .nav-cta a { background-color: #6a0dad; color: white; padding: 12px 22px; border-radius: 8px; transition: background-color 0.2s; }
         .nav-cta a:hover { background-color: #560a8c; color: white; }
 
-        /* Main Content Container for the quiz */
+        /* Main Content Container */
         .quiz-main-container {
             max-width: 700px;
             margin: 40px auto;
@@ -73,13 +73,32 @@
         .option-label:hover { border-color: #6a0dad; background-color: #f9f4fd; }
         input[type="radio"] { display: none; }
         input[type="radio"]:checked + .option-label { background-color: #6a0dad; color: white; border-color: #6a0dad; }
-        #next-button {
-            display: inline-block; padding: 15px 50px; margin-top: 30px;
+
+        /* --- START: BUTTON STYLES --- */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .nav-button {
+            display: inline-block; padding: 15px 50px;
             border: none; background-color: #6a0dad; color: white;
             cursor: pointer; border-radius: 5px; font-size: 1.2em; font-weight: bold;
             transition: background-color 0.2s;
         }
-        #next-button:hover { background-color: #560a8c; }
+        .nav-button:hover { background-color: #560a8c; }
+        #prev-button {
+            background-color: transparent;
+            color: #6a0dad;
+            border: 2px solid #6a0dad;
+        }
+        #prev-button:hover {
+            background-color: #f9f4fd;
+        }
+        /* --- END: BUTTON STYLES --- */
+
+        /* Result Screen */
         #result-screen { display: none; background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         #final-type-code { font-size: 3em; color: #6a0dad; margin: 10px 0; }
         .result-button {
@@ -98,8 +117,7 @@
     <header class="main-header">
         <div class="header-container">
             <a href="index.html" class="logo-link">
-                <span class="logo-text">16 Cat Personalities</span>
-                <span class="logo-tagline">(MeowBTI)</span>
+                <span class="logo-text">16 Cat Personalities</span><span class="logo-tagline">(MeowBTI)</span>
             </a>
             <nav class="main-nav">
                 <ul>
@@ -122,7 +140,10 @@
             <div id="question-page">
                 </div>
 
-            <button id="next-button">Next</button>
+            <div class="navigation-buttons">
+                <button id="prev-button" class="nav-button">Previous</button>
+                <button id="next-button" class="nav-button">Next</button>
+            </div>
         </div>
 
         <div id="result-screen">
@@ -140,8 +161,7 @@
     </footer>
 
     <script>
-        // --- START: FULL QUESTION LIST RESTORED ---
-        const questions = [
+        const questions = [ /* Your full list of 57 questions */
             ['When a new human guest enters the house, your cat:', 'Commands the room, immediately moving to greet/inspect the guest.', 'Retreats to a private, secure spot to watch from afar.', 'CS', 'C'],
             ['When hungry, your cat is more likely to:', 'Give a sharp, insistent demand or perform a strategic obstruction.', 'Sit nearby with a soulful gaze and a gentle, pleading meow.', 'BN', 'B'],
             ['When playing with a simple string or piece of fluff, your cat will:', 'Focus intensely on the *physical object* and how it moves *now*.', 'Treat the object as an imaginary *prey* in a complicated, abstract scenario.', 'HD', 'H'],
@@ -200,7 +220,6 @@
             ['Your cat\'s body language is:', 'Literal and clear (e.g., obvious stalk or rub).', 'Figurative and open to interpretation (a subtle glance, a strange posture).', 'HD', 'H'],
             ['Your cat is more comfortable:', 'Once a routine is established.', 'While the routine is still flexible.', 'RC', 'R'],
         ];
-        // --- END: FULL QUESTION LIST RESTORED ---
 
         const typeNames = {
             'CHBR': 'The Grand General', 'CHNR': 'The Affectionate Warden', 'CDBR': 'The Visionary Supervisor', 'CDNR': 'The Charismatic Counselor', 
@@ -216,6 +235,7 @@
 
         const questionPageContainer = document.getElementById('question-page');
         const nextButton = document.getElementById('next-button');
+        const prevButton = document.getElementById('prev-button'); // Get the new button
         const pageNumberEl = document.getElementById('page-number');
         const progressFillEl = document.getElementById('progress-fill');
 
@@ -223,28 +243,45 @@
             questionPageContainer.innerHTML = '';
             const start = currentPage * questionsPerPage;
             const end = Math.min(start + questionsPerPage, questions.length);
-            const pageQuestions = questions.slice(start, end);
 
-            pageQuestions.forEach((q, index) => {
-                const questionIndex = start + index;
+            for (let i = start; i < end; i++) {
+                const q = questions[i];
+                const questionIndex = i;
+                const isCheckedA = userAnswers[questionIndex] === 'A' ? 'checked' : '';
+                const isCheckedB = userAnswers[questionIndex] === 'B' ? 'checked' : '';
+                
                 const questionBlock = document.createElement('div');
                 questionBlock.className = 'question-block';
                 questionBlock.innerHTML = `
                     <p class="question-text">${questionIndex + 1}. ${q[0]}</p>
                     <div>
-                        <input type="radio" name="q${questionIndex}" id="q${questionIndex}a" value="A">
+                        <input type="radio" name="q${questionIndex}" id="q${questionIndex}a" value="A" ${isCheckedA}>
                         <label for="q${questionIndex}a" class="option-label">${q[1]}</label>
-                        <input type="radio" name="q${questionIndex}" id="q${questionIndex}b" value="B">
+                        <input type="radio" name="q${questionIndex}" id="q${questionIndex}b" value="B" ${isCheckedB}>
                         <label for="q${questionIndex}b" class="option-label">${q[2]}</label>
-                    </div>
-                `;
+                    </div>`;
                 questionPageContainer.appendChild(questionBlock);
-            });
+            }
 
+            // Update UI elements
             pageNumberEl.textContent = `Page ${currentPage + 1} of ${totalPages}`;
             progressFillEl.style.width = `${((currentPage) / totalPages) * 100}%`;
-            if (currentPage === totalPages - 1) {
-                nextButton.textContent = 'Finish & See Results';
+            
+            // Show/hide previous button
+            prevButton.style.display = currentPage === 0 ? 'none' : 'inline-block';
+            
+            // Update next button text
+            nextButton.textContent = (currentPage === totalPages - 1) ? 'Finish & See Results' : 'Next';
+        }
+
+        function saveCurrentAnswers() {
+            const start = currentPage * questionsPerPage;
+            const end = Math.min(start + questionsPerPage, questions.length);
+            for (let i = start; i < end; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (answer) {
+                    userAnswers[i] = answer.value;
+                }
             }
         }
 
@@ -252,20 +289,19 @@
             const start = currentPage * questionsPerPage;
             const end = Math.min(start + questionsPerPage, questions.length);
             let allAnswered = true;
-
             for (let i = start; i < end; i++) {
-                const answer = document.querySelector(`input[name="q${i}"]:checked`);
-                if (!answer) {
+                if (!document.querySelector(`input[name="q${i}"]:checked`)) {
                     allAnswered = false;
                     break;
                 }
-                userAnswers[i] = answer.value;
             }
 
             if (!allAnswered) {
-                alert('Please answer all questions before proceeding!');
+                alert('Please answer all questions on this page!');
                 return;
             }
+
+            saveCurrentAnswers();
 
             currentPage++;
             if (currentPage < totalPages) {
@@ -273,6 +309,15 @@
                 window.scrollTo(0, 0);
             } else {
                 calculateAndShowResults();
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 0) {
+                saveCurrentAnswers(); // Save answers before going back
+                currentPage--;
+                displayCurrentPage();
+                window.scrollTo(0, 0);
             }
         });
 
