@@ -104,7 +104,7 @@
             background-color: #560a8c;
         }
 
-        /* Footer */
+        /* --- START: CORRECTED FOOTER CSS --- */
         .site-footer {
             background-color: #f0f0f0; 
             padding: 25px 30px; 
@@ -116,7 +116,17 @@
             margin: 0 auto;
             text-align: center;
         }
-        .sponsor-text, .sponsor-logo, .disclaimer { margin-bottom: 15px; }
+        .sponsor-text {
+            margin-bottom: 10px;
+        }
+        .sponsor-logo {
+            max-height: 50px; /* This line fixes the size */
+            margin-bottom: 20px;
+        }
+        .disclaimer {
+             margin-bottom: 15px;
+        }
+        /* --- END: CORRECTED FOOTER CSS --- */
     </style>
 </head>
 <body>
@@ -144,104 +154,37 @@
         <section class="personality-group">
             <h2 class="group-title">The Generals (xHxR)</h2>
             <div class="group-grid">
-                <div class="personality-card">
-                    <p class="card-code">CHBR</p>
-                    <p class="card-name">The Grand General</p>
-                    <a href="CHBR.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">SHBR</p>
-                    <p class="card-name">The Silent Strategist</p>
-                    <a href="SHBR.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">CHNR</p>
-                    <p class="card-name">The Affectionate Warden</p>
-                    <a href="CHNR.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">SHNR</p>
-                    <p class="card-name">The Gentle Defender</p>
-                    <a href="SHNR.html" class="card-cta">Read More →</a>
-                </div>
+                <div class="personality-card"><p class="card-code">CHBR</p><p class="card-name">The Grand General</p><a href="CHBR.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">SHBR</p><p class="card-name">The Silent Strategist</p><a href="SHBR.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">CHNR</p><p class="card-name">The Affectionate Warden</p><a href="CHNR.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">SHNR</p><p class="card-name">The Gentle Defender</p><a href="SHNR.html" class="card-cta">Read More →</a></div>
             </div>
         </section>
-
         <section class="personality-group">
             <h2 class="group-title">The Visionaries (xDxR)</h2>
             <div class="group-grid">
-                <div class="personality-card">
-                    <p class="card-code">CDBR</p>
-                    <p class="card-name">The Visionary Supervisor</p>
-                    <a href="CDBR.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">SDBR</p>
-                    <p class="card-name">The Observant Theorist</p>
-                    <a href="SDBR.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">CDNR</p>
-                    <p class="card-name">The Charismatic Counselor</p>
-                    <a href="CDNR.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">SDNR</p>
-                    <p class="card-name">The Empathetic Muse</p>
-                    <a href="SDNR.html" class="card-cta">Read More →</a>
-                </div>
+                <div class="personality-card"><p class="card-code">CDBR</p><p class="card-name">The Visionary Supervisor</p><a href="CDBR.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">SDBR</p><p class="card-name">The Observant Theorist</p><a href="SDBR.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">CDNR</p><p class="card-name">The Charismatic Counselor</p><a href="CDNR.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">SDNR</p><p class="card-name">The Empathetic Muse</p><a href="SDNR.html" class="card-cta">Read More →</a></div>
             </div>
         </section>
-
         <section class="personality-group">
             <h2 class="group-title">The Mavericks (xHxC)</h2>
             <div class="group-grid">
-                <div class="personality-card">
-                    <p class="card-code">CHBC</p>
-                    <p class="card-name">The Street CEO</p>
-                    <a href="CHBC.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">SHBC</p>
-                    <p class="card-name">The Master Tinkerer</p>
-                    <a href="SHBC.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">CHNC</p>
-                    <p class="card-name">The Party Starter</p>
-                    <a href="CHNC.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">SHNC</p>
-                    <p class="card-name">The Emotional Artist</p>
-                    <a href="SHNC.html" class="card-cta">Read More →</a>
-                </div>
+                <div class="personality-card"><p class="card-code">CHBC</p><p class="card-name">The Street CEO</p><a href="CHBC.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">SHBC</p><p class="card-name">The Master Tinkerer</p><a href="SHBC.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">CHNC</p><p class="card-name">The Party Starter</p><a href="CHNC.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">SHNC</p><p class="card-name">The Emotional Artist</p><a href="SHNC.html" class="card-cta">Read More →</a></div>
             </div>
         </section>
-
         <section class="personality-group">
             <h2 class="group-title">The Artists (xDxC)</h2>
             <div class="group-grid">
-                <div class="personality-card">
-                    <p class="card-code">CDBC</p>
-                    <p class="card-name">The Wild Debater</p>
-                    <a href="CDBC.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">SDBC</p>
-                    <p class="card-name">The Free Spirit</p>
-                    <a href="SDBC.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">CDNC</p>
-                    <p class="card-name">The Joyful Performer</p>
-                    <a href="CDNC.html" class="card-cta">Read More →</a>
-                </div>
-                <div class="personality-card">
-                    <p class="card-code">SDNC</p>
-                    <p class="card-name">The Peaceful Dreamer</p>
-                    <a href="SDNC.html" class="card-cta">Read More →</a>
-                </div>
+                <div class="personality-card"><p class="card-code">CDBC</p><p class="card-name">The Wild Debater</p><a href="CDBC.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">SDBC</p><p class="card-name">The Free Spirit</p><a href="SDBC.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">CDNC</p><p class="card-name">The Joyful Performer</p><a href="CDNC.html" class="card-cta">Read More →</a></div>
+                <div class="personality-card"><p class="card-code">SDNC</p><p class="card-name">The Peaceful Dreamer</p><a href="SDNC.html" class="card-cta">Read More →</a></div>
             </div>
         </section>
         
